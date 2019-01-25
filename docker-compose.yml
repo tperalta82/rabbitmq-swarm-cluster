@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   rmq:
-    image: lovelysystems/rabbitmq-swarm-cluster
+    image: tperalta82/rabbitmq-swarm-cluster
     hostname: "{{.Service.Name}}.{{.Task.Slot}}.{{.Task.ID}}"
     deploy:
       replicas: 2
@@ -11,10 +11,13 @@ services:
         parallelism: 1
         delay: 10s
     environment:
-      - RABBITMQ_ERLANG_COOKIE=abc
+      - RABBITMQ_ERLANG_COOKIE=dOn0dUDOXykc7KQezdz2
       - RABBITMQ_USE_LONGNAME=true
       - RABBITMQ_MNESIA_DIR=/var/lib/rabbitmq/mnesia
       - RABBITMQ_PLUGINS_EXPAND_DIR=/var/lib/rabbitmq/mnesia/plugins-expand
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASSWORD=admin
+      - RABBITMQ_DEFAULT_VHOST=vhost
       - SERVICE_NAME={{.Service.Name}}
       - SLOT={{.Task.Slot}}
       - MASTER_SLOT=1
